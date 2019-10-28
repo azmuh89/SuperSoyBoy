@@ -2,15 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraLerpToTransform : MonoBehaviour {
+public class CameraLerpToTransform : MonoBehaviour
+{
+    // These variables specify the target the camera will track, tracking speed and the camera's bounds
+    public Transform camTarget;
+    public float trackingSpeed;
+    public float minX;
+    public float minY;
+    public float maxX;
+    public float maxY;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // Called with every fixed-framerate frame
+    void FixedUpdate()
+    {
+        // Ensures that a valid Transform component was assigned to the camTarget field on the script in the editor
+        if(camTarget != null)
+        {
+            //performs linear interpolation between two vectors by the third parameter's value
+            var newPos = Vector2.Lerp(transform.position, camTarget.position, Time.deltaTime * trackingSpeed);
+            var camPosition = new Vector3(newPos.x, newPos.y, -10f);
+            var v3 = camPosition;
+            var clampX = Mathf.Clamp(v3.x, minX, maxX);
+            var clampY = Mathf.Clamp(v3.y, minY, maxY);
+            transform.position = new Vector3(clampX, clampY, -10f);
+        }
+    }
 }
