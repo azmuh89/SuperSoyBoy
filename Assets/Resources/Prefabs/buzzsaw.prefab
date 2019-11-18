@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8935448027716376701}
   - component: {fileID: 8935448027716376674}
   - component: {fileID: 8072443780584484870}
-  - component: {fileID: 7693908274291112774}
-  - component: {fileID: 940209743159199985}
+  - component: {fileID: -754028763844211404}
+  - component: {fileID: 7970186224503907928}
   m_Layer: 0
   m_Name: buzzsaw
   m_TagString: Untagged
@@ -218,7 +218,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &7693908274291112774
+--- !u!114 &-754028763844211404
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -227,23 +227,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 8935448027716376675}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb21ffbed0274ea40a0c61210655ddf2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerDeathPrefab: {fileID: 4546158487836978059, guid: f3a4c05c2f74e1746aafb5eb0f6af05c,
-    type: 3}
-  deathClip: {fileID: 8300000, guid: 20d68b3df7b8bf047a3ed6c5e47ae6c5, type: 3}
-  hitSprite: {fileID: 21300000, guid: e34df7d72fac13944bc0e0fe2b92e9cd, type: 3}
---- !u!114 &940209743159199985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8935448027716376675}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe37282a578fd484a8527d497776c5ee, type: 3}
+  m_Script: {fileID: 11500000, guid: efe94690177e4fa4bab96bfe69c0065d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rotationsPerMinute: 640
+--- !u!114 &7970186224503907928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8935448027716376675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bceca92255775bc4aa43bb696348f146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerDeathPrefab: {fileID: 1000012039980154, guid: 620631aa7841b0342972728496b2d20f,
+    type: 3}
+  deathClip: {fileID: 8300000, guid: 20d68b3df7b8bf047a3ed6c5e47ae6c5, type: 3}
+  hitSprite: {fileID: 21300000, guid: e34df7d72fac13944bc0e0fe2b92e9cd, type: 3}

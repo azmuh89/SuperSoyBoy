@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
@@ -12,11 +10,6 @@ public class Timer : MonoBehaviour
         timerText = GetComponent<Text>();
     }
 
-    void Start()
-    {
-        
-    }
-    
     void Update()
     {
         timerText.text = System.Math.Round((decimal)Time.timeSinceLevelLoad, 2).ToString();

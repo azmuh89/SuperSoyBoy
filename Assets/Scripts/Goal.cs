@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using System.Collections;
 
 public class Goal : MonoBehaviour
 {
@@ -11,22 +10,11 @@ public class Goal : MonoBehaviour
         if (coll.gameObject.tag == "Player")
         {
             var audioSource = GetComponent<AudioSource>();
-
             if (audioSource != null && goalClip != null)
             {
                 audioSource.PlayOneShot(goalClip);
             }
             GameManager.instance.RestartLevel(0.5f);
         }
-    }
-
-    void Start()
-    {
-        
-    }
-    
-    void Update()
-    {
-        
     }
 }
