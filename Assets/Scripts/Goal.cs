@@ -14,7 +14,13 @@ public class Goal : MonoBehaviour
             {
                 audioSource.PlayOneShot(goalClip);
             }
+
             GameManager.instance.RestartLevel(0.5f);
+
+            // finds the times script component instance in the level scene.
+            var timer = FindObjectOfType<Timer>();
+            // called on the GameManager  singleton, passing in the current level runtime from the Timer script.
+            GameManager.instance.SaveTime(timer.time);
         }
     }
 }
