@@ -96,9 +96,8 @@ public class GameManager : MonoBehaviour
         // collects existing times using the LoadPreviousTimes() method.
         var times = LoadPreviousTimes();
         var topThree = times.OrderBy(time => time.time).Take(3);
-        // Find the PreviousTImes component
-        var timesLabel = GameObject.Find("PreviousTimes")
-        .GetComponent<Text>();
+        // Find the PreviousTimes component
+        var timesLabel = GameObject.Find("PreviousTimes").GetComponent<Text>();
         // Changes it to show each time found, seperating entries with a line break using the "\n" string.
         timesLabel.text = "BEST TIMES \n";
         foreach (var time in topThree)
