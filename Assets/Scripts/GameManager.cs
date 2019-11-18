@@ -27,8 +27,7 @@ public class GameManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
     }
-
-    // Use this for initialization
+    
     void Start ()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -45,19 +44,22 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(delay);
         SceneManager.LoadScene("Game");
     }
-
-    // Update is called once per frame
-    void Update () {
-	
-	}
+    
+    void Update ()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("Menu");
+        }
+    }
 
     public List<PlayerTimeEntry> LoadPreviousTimes()
     {
         // use try/catch statement to attempt to load saved time entries for player
         try
         {
-            var scoresFile = Application.persistentDataPath +
-            "/" + playerName + "_times.dat";
+            var levelName = Path.GetFileName(selectedLevel);
+            var scoresFile = Application.persistentDataPath + "/" + playerName + "_" + levelName + "_times.dat";
             using (var stream = File.Open(scoresFile, FileMode.Open))
             {
                 var bin = new BinaryFormatter();
@@ -84,8 +86,8 @@ public class GameManager : MonoBehaviour
         newTime.time = time;
         // create a binary formatter object to do the magic serialization
         var bFormatter = new BinaryFormatter();
-        var filePath = Application.persistentDataPath +
-        "/" + playerName + "_times.dat";
+        var levelName = Path.GetFileName(selectedLevel);
+        var filePath = Application.persistentDataPath + "/" + playerName + "_" + levelName + "_times.dat";
         using (var file = File.Open(filePath, FileMode.Create))
         {
             times.Add(newTime);
@@ -97,6 +99,12 @@ public class GameManager : MonoBehaviour
     {
         // collects existing times using the LoadPreviousTimes() method.
         var times = LoadPreviousTimes();
+        var levelName = Path.GetFileName(selectedLevel);
+
+        if (levelName != null)
+        {
+            levelName = levelName.Replace(".json", "");
+        }
         var topThree = times.OrderBy(time => time.time).Take(3);
         // Find the PreviousTimes component
         var timesLabel = GameObject.Find("PreviousTimes").GetComponent<Text>();
@@ -104,8 +112,7 @@ public class GameManager : MonoBehaviour
         timesLabel.text = "BEST TIMES \n";
         foreach (var time in topThree)
         {
-            timesLabel.text += time.entryDate.ToShortDateString() +
-            ": " + time.time + "\n";
+            timesLabel.text += time.entryDate.ToShortDateString() + ": " + time.time + "\n";
         }
     }
 
