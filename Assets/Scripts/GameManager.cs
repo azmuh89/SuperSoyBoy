@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 {
     public string playerName;
     public static GameManager instance;
+    public GameObject buttonPrefab;
+    private string selectedLevel;
 
     void Awake()
     {
@@ -30,6 +32,7 @@ public class GameManager : MonoBehaviour
     void Start ()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+        DiscoverLevels();
 	}
 
     public void RestartLevel(float delay)
@@ -66,8 +69,7 @@ public class GameManager : MonoBehaviour
         // if deserialization is unsuccessful the catch statement finds the errors
         catch (IOException ex)
         {
-            Debug.LogWarning("Couldn’t load previous times for: " +
-            playerName + ". Exception: " + ex.Message);
+            Debug.LogWarning("Couldn’t load previous times for: " + playerName + ". Exception: " + ex.Message);
             return new List<PlayerTimeEntry>();
         }
     }
@@ -113,5 +115,53 @@ public class GameManager : MonoBehaviour
         {
             DisplayPreviousTimes();
         }
+    }
+
+    private void SetLevelName(string levelFilePath)
+    {
+        selectedLevel = levelFilePath;
+        SceneManager.LoadScene("Game");
+    }
+
+    private void DiscoverLevels()
+    {
+        var levelPanelRectTransform =
+        GameObject.Find("LevelItemsPanel").GetComponent<RectTransform>();
+        var levelFiles = Directory.GetFiles(Application.dataPath, "*.json");
+
+        var yOffset = 0f;
+
+        for (var i = 0; i < levelFiles.Length; i++)
+        {
+            if (i == 0)
+            {
+                yOffset = -30f;
+            }
+            else
+            {
+                yOffset -= 65f;
+            }
+            var levelFile = levelFiles[i];
+            var levelName = Path.GetFileName(levelFile);
+
+            // instantiates a copy of the button prefab
+            var levelButtonObj = (GameObject)Instantiate(buttonPrefab, Vector2.zero, Quaternion.identity);
+            // gets its Transform and makes it a child of LevelItemsPanel
+            var levelButtonRectTransform = levelButtonObj.GetComponent<RectTransform>();
+            levelButtonRectTransform.SetParent(levelPanelRectTransform, true);
+            // positions it based on a fixed X-position and a variable Y-position
+            levelButtonRectTransform.anchoredPosition = new Vector2(212.5f, yOffset);
+            // sets the button text to the level's name.
+            var levelButtonText = levelButtonObj.transform.GetChild(0).GetComponent<Text>();
+            levelButtonText.text = levelName;
+
+            var levelButton = levelButtonObj.GetComponent<Button>();
+            levelButton.onClick.AddListener(
+             delegate { SetLevelName(levelFile); });
+            levelPanelRectTransform.sizeDelta =
+             new Vector2(levelPanelRectTransform.sizeDelta.x, 60f * i);
+        }
+
+        levelPanelRectTransform.offsetMax = new Vector2(levelPanelRectTransform.offsetMax.x, 0f);
     }
 }

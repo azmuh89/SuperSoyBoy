@@ -236,7 +236,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1000012036862378}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 465496b6d23c9224f8ed4201119860c4, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e557fee87cd0c945af21eff33a60ef5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   goalClip: {fileID: 8300000, guid: 236f4bd026e2c3a4dbd496505a4cec05, type: 3}

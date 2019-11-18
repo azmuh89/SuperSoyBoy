@@ -405,7 +405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 150ecdec96d8cf24e8d43c1b5f2c28b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: my super awesome level
+  levelName: Level 1
 --- !u!1 &794759186 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7072802631083991314, guid: 2fd08805e60393346861ae4ccf70c785,
